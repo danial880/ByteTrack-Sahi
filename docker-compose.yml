@@ -1,0 +1,12 @@
+version: "3.3"
+
+
+services:
+  real_deal:
+    build:
+      context: ./real_deal/
+      dockerfile: Dockerfile
+    volumes: 
+      - "./real_deal:/real_deal"
+     
+    
