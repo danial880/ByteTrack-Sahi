@@ -162,6 +162,5 @@ dependencies:
     - wcwidth==0.2.5
     - werkzeug==2.2.2
     - xmltodict==0.13.0
-    - yolox==0.1.0
     - zipp==3.11.0
 prefix: /home/danial/anaconda3/envs/sahi
