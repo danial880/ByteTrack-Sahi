@@ -2,11 +2,11 @@ version: "3.3"
 
 
 services:
-  ByteTrackSahi:
+  byte_track_sahi:
     build:
-      context: ./real_deal/
+      context: ./byte_track_sahi/
       dockerfile: Dockerfile
     volumes: 
-      - "./real_deal:/real_deal"
+      - "./byte_track_sahi:/byte_track_sahi"
      
     

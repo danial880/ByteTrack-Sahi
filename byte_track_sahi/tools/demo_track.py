@@ -6,7 +6,7 @@ import cv2
 import torch
 
 from loguru import logger
-
+from config import Config
 from yolox.data.data_augment import preproc
 from yolox.exp import get_exp
 from yolox.utils import fuse_model, get_model_info, postprocess
@@ -206,9 +206,10 @@ def image_demo(predictor, vis_folder, current_time, args):
                         f"{frame_id},{tid},{tlwh[0]:.2f},{tlwh[1]:.2f},{tlwh[2]:.2f},{tlwh[3]:.2f},{t.score:.2f},-1,-1,-1\n"
                     )
             timer.toc()
-            online_im = plot_tracking(
-                img_info['raw_img'], online_tlwhs, online_ids, frame_id=frame_id, fps=1. / timer.average_time
-            )
+            if args.save_result:
+                online_im = plot_tracking(
+                    img_info['raw_img'], online_tlwhs, online_ids, frame_id=frame_id, fps=1. / timer.average_time
+                )
         else:
             timer.toc()
             online_im = img_info['raw_img']
@@ -227,7 +228,8 @@ def image_demo(predictor, vis_folder, current_time, args):
         if ch == 27 or ch == ord("q") or ch == ord("Q"):
             break
 
-    if args.save_result:
+    if args.save_txt:
+        timestamp = time.strftime("%Y_%m_%d_%H_%M_%S", current_time)
         res_file = osp.join(vis_folder, f"{timestamp}.txt")
         with open(res_file, 'w') as f:
             f.writelines(results)
@@ -306,12 +308,10 @@ def main(exp, args):
     output_dir = osp.join(exp.output_dir, args.experiment_name)
     os.makedirs(output_dir, exist_ok=True)
 
-    if args.save_result:
+    if args.save_result or args.save_txt:
         vis_folder = osp.join(output_dir, "track_vis")
         os.makedirs(vis_folder, exist_ok=True)
 
-    if args.trt:
-        args.device = "gpu"
     args.device = torch.device("cuda" if args.device == "gpu" else "cpu")
 
     logger.info("Args: {}".format(args))
@@ -327,36 +327,16 @@ def main(exp, args):
     logger.info("Model Summary: {}".format(get_model_info(model, exp.test_size)))
     model.eval()
 
-    if not args.trt:
-        if args.ckpt is None:
-            ckpt_file = osp.join(output_dir, "best_ckpt.pth.tar")
-        else:
-            ckpt_file = args.ckpt
-        logger.info("loading checkpoint")
-        ckpt = torch.load(ckpt_file, map_location="cpu")
-        # load the model state dict
-        model.load_state_dict(ckpt["model"])
-        logger.info("loaded checkpoint done.")
+    ckpt_file = args.ckpt
+    logger.info("loading checkpoint")
+    ckpt = torch.load(ckpt_file, map_location="cpu")
+    # load the model state dict
+    model.load_state_dict(ckpt["model"])
+    logger.info("loaded checkpoint done.")
 
-    if args.fuse:
-        logger.info("\tFusing model...")
-        model = fuse_model(model)
 
-    if args.fp16:
-        model = model.half()  # to FP16
-
-    if args.trt:
-        assert not args.fuse, "TensorRT model is not support model fusing!"
-        trt_file = osp.join(output_dir, "model_trt.pth")
-        assert osp.exists(
-            trt_file
-        ), "TensorRT model is not found!\n Run python3 tools/trt.py first!"
-        model.head.decode_in_inference = False
-        decoder = model.head.decode_outputs
-        logger.info("Using TensorRT to inference")
-    else:
-        trt_file = None
-        decoder = None
+    trt_file = None
+    decoder = None
 
     predictor = Predictor(model, exp, trt_file, decoder, args.device, args.fp16)
     current_time = time.localtime()
@@ -367,7 +347,7 @@ def main(exp, args):
 
 
 if __name__ == "__main__":
-    args = make_parser().parse_args()
+    args = Config()#make_parser().parse_args()
     exp = get_exp(args.exp_file, args.name)
 
     main(exp, args)

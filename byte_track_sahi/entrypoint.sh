@@ -15,4 +15,4 @@ set -euo pipefail
 
 # exec the final command:
 
-exec python run.py
+exec python tools/sahi_track_vX.py
