@@ -31,16 +31,16 @@
 ## Inference
 ### ByteTrack
 ```
-cd ByteTrack
+cd ByteTrackSahi
 python tools/demo_track.py -f exps/example/mot/yolox_x_mix_mot20_ch.py -c pretrained/bytetrack_x_mot20.tar --fuse --save_result --path train_part7/07_University_Campus --conf 0.25 --nms 0.45 --tsize 5120
 ```
 ### SAHI with ByteTrack (Yolov7)
 ```
-cd ByteTrack
+cd ByteTrackSahi
 python tools/sahi_track_v7.py -f exps/example/mot/yolox_x_mix_mot20_ch.py -c pretrained/bytetrack_x_mot20.tar -y7 models/best.pt --path train_part7/07_University_Campus --tsize 5120 --conf 0.25 --overlap_height 0.2 --overlap_width 0.2 --ios 0.8 --save_result --save_txt
 ```
 ### SAHI with ByteTrack (YolovX)
 ```
-cd ByteTrack
+cd ByteTrackSahi
 python tools/sahi_track_vX.py -f exps/example/mot/yolox_x_mix_mot20_ch.py -c pretrained/bytetrack_x_mot20.tar -y7 models/best.pt --path train_part7/07_University_Campus --tsize 5120 --conf 0.25 --overlap_height 0.2 --overlap_width 0.2 --ios 0.8 --save_result --save_txt
 ```
