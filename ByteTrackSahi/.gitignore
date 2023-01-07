@@ -140,5 +140,5 @@ events.out.tfevents*
 YOLOX_outputs
 train_part7
 pretrained
-# models
+yolo_models
 datasets
