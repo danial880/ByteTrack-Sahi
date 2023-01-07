@@ -25,8 +25,8 @@
 </details> 
 
 ## Download Models
-- Download [Yolov7-E6E](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt) and put it under [ByteTrackSahi/models](https://github.com/danial880/Multi-Object-Tracking/tree/main/ByteTrack/models) folder
-- Download [bytetrack_x_mot20](https://drive.google.com/file/d/1HX2_JpMOjOIj1Z9rJjoet9XNy_cCAs5U/view?usp=sharing) and put it under [pretrained](https://github.com/danial880/Multi-Object-Tracking/tree/main/ByteTrack/pretrained) folder
+- Download [Yolov7-E6E](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt) and put it under [ByteTrackSahi/yolo_models](https://github.com/danial880/ByteTrack-Sahi/tree/main/ByteTrackSahi/yolo_models) folder
+- Download [bytetrack_x_mot20](https://drive.google.com/file/d/1HX2_JpMOjOIj1Z9rJjoet9XNy_cCAs5U/view?usp=sharing) and put it under [pretrained](https://github.com/danial880/ByteTrack-Sahi/tree/main/ByteTrackSahi/pretrained) folder
 
 ## Inference
 ### ByteTrack
@@ -40,7 +40,6 @@ cd ByteTrack
 python tools/sahi_track_v7.py -f exps/example/mot/yolox_x_mix_mot20_ch.py -c pretrained/bytetrack_x_mot20.tar -y7 models/best.pt --path train_part7/07_University_Campus --tsize 5120 --conf 0.25 --overlap_height 0.2 --overlap_width 0.2 --ios 0.8 --save_result --save_txt
 ```
 ### SAHI with ByteTrack (YolovX)
-Edit line 117-118 of [tools/sahi_track_vX.py](https://github.com/danial880/Multi-Object-Tracking/blob/main/ByteTrack/tools/sahi_track_vX.py) for changing sahi overlap threshold
 ```
 cd ByteTrack
 python tools/sahi_track_vX.py -f exps/example/mot/yolox_x_mix_mot20_ch.py -c pretrained/bytetrack_x_mot20.tar -y7 models/best.pt --path train_part7/07_University_Campus --tsize 5120 --conf 0.25 --overlap_height 0.2 --overlap_width 0.2 --ios 0.8 --save_result --save_txt
