@@ -1,5 +1,5 @@
 class Config(object):
-    # model to run options('sahi_yolo7','sahi_yolox','norm_yolox')
+    # model to run options('sahi_yolo7','sahi_yoloX','norm_yoloX')
     model_to_run = 'sahi_yolo7'
     # path to image directory
     path = 'train_part7/07_University_Campus'#'path/to/image/directory'

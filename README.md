@@ -24,17 +24,20 @@
 
 ## Inference
 ### ByteTrack
+Open byte_track_sahi/tools/config.py
 ```
-cd byte_track_sahi
-python tools/demo_track.py
+# at line number 3
+model_to_run = 'norm_yoloX'
 ```
-### SAHI with ByteTrack (Yolov7)
+### ByteTrack with SAHI (Yolov7)
+Open byte_track_sahi/tools/config.py
 ```
-cd byte_track_sahi
-python tools/sahi_track_v7.py
+# at line number 3
+model_to_run = 'sahi_yolo7'
 ```
-### SAHI with ByteTrack (YolovX)
+### ByteTrack with SAHI (YolovX)
+Open byte_track_sahi/tools/config.py
 ```
-cd byte_track_sahi
-python tools/sahi_track_vX.py 
+# at line number 3
+model_to_run = 'sahi_yoloX'
 ```

@@ -19,8 +19,8 @@ if __name__ == "__main__":
     cfg = Config()
     model = cfg.model_to_run
     command = {'sahi_yolo7':'python tools/sahi_track_v7.py',
-               'sahi_yolox':'python tools/sahi_track_vX.py',
-               'norm_yolox':'python tools/demo_track.py'}    
+               'sahi_yoloX':'python tools/sahi_track_vX.py',
+               'norm_yoloX':'python tools/demo_track.py'}    
     p = run_process_2(command[model])
 
 
