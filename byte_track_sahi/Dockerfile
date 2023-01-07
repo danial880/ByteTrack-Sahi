@@ -1,6 +1,5 @@
 FROM continuumio/miniconda3
 USER root
-WORKDIR home
 RUN apt-get update
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 # Create the environment:
@@ -9,13 +8,13 @@ RUN conda env create -f environment.yml
 # Make RUN commands use the new environment:
 RUN echo "conda activate sahi" >> ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
-# Demonstrate the environment is activated:
-RUN echo "Make sure OpenCV is installed:"
-RUN python -c "import cv2"
 RUN pip install cython_bbox
 RUN git clone https://github.com/ifzhang/ByteTrack.git
-WORKDIR ByteTrack
-RUN python setup.py install
-#COPY ./f2/run.py ./f2/entrypoint.sh ./
-RUN  chmod +x entrypoint.sh
+RUN cd ByteTrack && python setup.py install
+RUN pip install -r https://raw.githubusercontent.com/WongKinYiu/yolov7/main/requirements.txt
+RUN git clone https://github.com/danial880/Sahi-Yolov7.git
+RUN cd Sahi-Yolov7 && python setup.py install
+WORKDIR /byte_track_sahi
+# RUN  chmod +x entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
+

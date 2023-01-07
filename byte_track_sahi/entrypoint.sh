@@ -8,11 +8,12 @@ set -euo pipefail
 
 # Temporarily disable strict mode and activate conda:
 set +euo pipefail
-conda activate prc
+conda activate sahi
 
 # Re-enable strict mode:
 set -euo pipefail
 
 # exec the final command:
 
-exec python tools/sahi_track_vX.py
+exec python start.py
+
