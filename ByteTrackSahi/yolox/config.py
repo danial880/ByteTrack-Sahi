@@ -13,10 +13,20 @@ class ConfigVX(object):
     check_point = 'pretrained/bytetrack_x_mot20.tar'
     # device to run our model e.g. cpu or gpu
     device = 'gpu'
+    # test mot20
+    mot20 = False
     ########################## detection parameters ############################
     # test conf
     conf = 0.25
     # test img size
     tsize = 5120
-    #
+    ########################## tracking parameters ############################
+    # tracking confidence threshold
+    track_thresh = 0.50
+    # frame rate
+    fps = 30
+    # threshold for filtering out boxes of which aspect ratio are above the given value.
+    aspect_ratio_thresh = 1.6
+    # matching threshold for tracking
+    match_thresh = 0.8
     
