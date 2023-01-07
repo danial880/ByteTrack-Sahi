@@ -31,16 +31,16 @@
 ## Inference
 ### ByteTrack
 ```
-cd ByteTrackSahi
+cd byte_track_sahi
 python tools/demo_track.py
 ```
 ### SAHI with ByteTrack (Yolov7)
 ```
-cd ByteTrackSahi
+cd byte_track_sahi
 python tools/sahi_track_v7.py
 ```
 ### SAHI with ByteTrack (YolovX)
 ```
-cd ByteTrackSahi
+cd byte_track_sahi
 python tools/sahi_track_vX.py 
 ```
