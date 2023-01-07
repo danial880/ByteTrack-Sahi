@@ -25,7 +25,7 @@
 </details> 
 
 ## Download Models
-- Download [Yolov7-E6E](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt) and put it under [ByteTrackSahi/yolo_models](https://github.com/danial880/ByteTrack-Sahi/tree/main/ByteTrackSahi/yolo_models) folder
+- Download [Yolov7-E6E](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt) and put it under [byte_track_sahi/yolo_models](https://github.com/danial880/ByteTrack-Sahi/tree/main/ByteTrackSahi/yolo_models) folder
 - Download [bytetrack_x_mot20](https://drive.google.com/file/d/1HX2_JpMOjOIj1Z9rJjoet9XNy_cCAs5U/view?usp=sharing) and put it under [pretrained](https://github.com/danial880/ByteTrack-Sahi/tree/main/ByteTrackSahi/pretrained) folder
 
 ## Inference
