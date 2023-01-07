@@ -7,6 +7,7 @@ import torch
 import numpy as np
 from loguru import logger
 from tqdm import tqdm
+from config import Config
 from sahi.prediction import ObjectPrediction
 from sahi.postprocess.utils import ObjectPredictionList, has_match
 from sahi.postprocess.utils import merge_object_prediction_pair
@@ -85,12 +86,14 @@ class Predictor(object):
         self,
         model,
         exp,
+        args,
         trt_file=None,
         decoder=None,
         device=torch.device("cpu"),
         fp16=False
     ):
         self.model = model
+        self.args = args
         self.decoder = decoder
         self.num_classes = exp.num_classes
         self.confthre = exp.test_conf
@@ -106,8 +109,8 @@ class Predictor(object):
             image=img,
             slice_height=exp.test_size[0],
             slice_width=exp.test_size[0],
-            overlap_height_ratio=0.1,
-            overlap_width_ratio=0.1,
+            overlap_height_ratio=self.args.overlap_height,
+            overlap_width_ratio=self.args.overlap_width,
             auto_slice_resolution=False,
         )
         return slice_image_result
@@ -128,7 +131,7 @@ class Predictor(object):
         keep_to_merge_list = batched_greedy_nmm(
             cuda_tensor,
             match_metric = "IOS",
-            match_threshold = 0.8,
+            match_threshold = self.args.ios,
         )
         object_prediction_list = ObjectPredictionList(object_prediction_list)
         selected_object_predictions = []
@@ -138,7 +141,7 @@ class Predictor(object):
                     object_prediction_list[keep_ind].tolist(),
                     object_prediction_list[merge_ind].tolist(),
                     "IOS",
-                    0.8,
+                    self.args.ios,
                 ):
                     object_prediction_list[keep_ind] = merge_object_prediction_pair(
                         object_prediction_list[keep_ind].tolist(),
@@ -339,7 +342,7 @@ def main(exp, args):
     trt_file = None
     decoder = None
 
-    predictor = Predictor(model, exp, trt_file, decoder, args.device, args.fp16)
+    predictor = Predictor(model, exp, args, trt_file, decoder, args.device, args.fp16)
     current_time = time.localtime()
     if args.demo == "image":
         image_demo(predictor, vis_folder, current_time, args)
@@ -347,7 +350,7 @@ def main(exp, args):
 
 
 if __name__ == "__main__":
-    args = make_parser().parse_args()
+    args = Config()#make_parser().parse_args()
     #print(args.name)
     exp = get_exp(args.exp_file, args.name)
     #print(exp)

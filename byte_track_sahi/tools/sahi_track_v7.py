@@ -7,6 +7,7 @@ import torch
 import numpy as np
 from loguru import logger
 from tqdm import tqdm
+from config import Config
 from yolox.data.data_augment import preproc
 from yolox.exp import get_exp
 from yolox.utils import fuse_model, get_model_info, postprocess
@@ -67,27 +68,6 @@ def make_parser():
     parser.add_argument("--nms", default=None, type=float, help="test nms threshold")
     parser.add_argument("--tsize", default=None, type=int, help="test img size")
     parser.add_argument("--fps", default=30, type=int, help="frame rate (fps)")
-    parser.add_argument(
-        "--fp16",
-        dest="fp16",
-        default=False,
-        action="store_true",
-        help="Adopting mix precision evaluating.",
-    )
-    parser.add_argument(
-        "--fuse",
-        dest="fuse",
-        default=False,
-        action="store_true",
-        help="Fuse conv and bn for testing.",
-    )
-    parser.add_argument(
-        "--trt",
-        dest="trt",
-        default=False,
-        action="store_true",
-        help="Using TensorRT model for testing.",
-    )
     # tracking args
     parser.add_argument("--track_thresh", type=float, default=0.45, help="tracking confidence threshold")
     parser.add_argument("--track_buffer", type=int, default=30, help="the frames for keep lost tracks")
@@ -242,46 +222,24 @@ def main(exp, args):
     #logger.info("Model Summary: {}".format(get_model_info(model, exp.test_size)))
     model.eval()
 
-    if not args.trt:
-        if args.ckpt is None:
-            ckpt_file = osp.join(output_dir, "best_ckpt.pth.tar")
-        else:
-            ckpt_file = args.ckpt
-        logger.info("loading checkpoint")
-        ckpt = torch.load(ckpt_file, map_location="cpu")
-        # load the model state dict
-        model.load_state_dict(ckpt["model"])
-        logger.info("loaded checkpoint done.")
+    ckpt_file = args.ckpt
+    logger.info("loading checkpoint")
+    ckpt = torch.load(ckpt_file, map_location="cpu")
+    # load the model state dict
+    model.load_state_dict(ckpt["model"])
+    logger.info("loaded checkpoint done.")
 
-    if args.fuse:
-        logger.info("\tFusing model...")
-        model = fuse_model(model)
 
-    if args.fp16:
-        model = model.half()  # to FP16
-
-    if args.trt:
-        assert not args.fuse, "TensorRT model is not support model fusing!"
-        trt_file = osp.join(output_dir, "model_trt.pth")
-        assert osp.exists(
-            trt_file
-        ), "TensorRT model is not found!\n Run python3 tools/trt.py first!"
-        model.head.decode_in_inference = False
-        decoder = model.head.decode_outputs
-        logger.info("Using TensorRT to inference")
-    else:
-        trt_file = None
-        decoder = None
+    trt_file = None
+    decoder = None
 
     current_time = time.localtime()
     if args.demo == "image":
         image_demo(vis_folder, current_time, args)
-    elif args.demo == "video" or args.demo == "webcam":
-        imageflow_demo(predictor, vis_folder, current_time, args)
 
 
 if __name__ == "__main__":
-    args = make_parser().parse_args()
+    args = Config()#make_parser().parse_args()
     exp = get_exp(args.exp_file, args.name)
 
     main(exp, args)

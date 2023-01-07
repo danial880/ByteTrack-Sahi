@@ -2,7 +2,7 @@ version: "3.3"
 
 
 services:
-  real_deal:
+  ByteTrackSahi:
     build:
       context: ./real_deal/
       dockerfile: Dockerfile
