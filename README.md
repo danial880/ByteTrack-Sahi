@@ -23,6 +23,12 @@
 </details> 
 
 ## Inference
+#### Set Path
+Open byte_track_sahi/tools/config.py
+```
+# at line number 5
+path = 'path/to/image/directory'
+```
 ### ByteTrack
 Open byte_track_sahi/tools/config.py
 ```
