@@ -7,7 +7,8 @@
 
 <summary>
 <big><b>Nvidia-Docker2 Installation</b></big>
-</summary>
+</summary>  
+
 ```
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
       && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -15,6 +16,7 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
             sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
             sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.listdir
 ```
+
 ```
 sudo apt-get update
 ```
