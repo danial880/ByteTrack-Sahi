@@ -8,7 +8,6 @@
 <summary>
 <big><b>Nvidia-Docker2 Installation</b></big>
 </summary>  
-
 ```
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
       && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -29,8 +28,7 @@ sudo systemctl restart docker
 </details> 
 <b>Note:<b> Docker-compose version >=1.28 
 <details>
-  
-  
+
 <summary>
 <big><b>Docker</b></big>
 </summary>  
