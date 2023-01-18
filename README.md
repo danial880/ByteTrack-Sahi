@@ -37,7 +37,7 @@ sudo systemctl restart docker
 <summary>
 <big><b>Docker</b></big>
 </summary>  
-- Note: Docker-compose version >=1.28  
+Note: Docker-compose version >=1.28  
 
 - Install
 ```js
