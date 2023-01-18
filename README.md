@@ -2,12 +2,12 @@
 In this repository, the bytetrack tracker is combined with the sahi algorithm.
 <details>
 <summary>
-<big><b>Download Models</big>
+<big><b>Download Models</b></big>
 </summary>  
 
-<p>Download <a href="https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt">Yolov7-E6E</a> and put it under <a href="https://github.com/danial880/ByteTrack-Sahi/tree/main/byte_track_sahi/yolo_models">yolo_models</a> folder<p>  
+- Download <a href="https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-e6e.pt">Yolov7-E6E</a> and put it under <a href="https://github.com/danial880/ByteTrack-Sahi/tree/main/byte_track_sahi/yolo_models">yolo_models</a> folder  
 
-<p>Download [bytetrack_x_mot20](https://drive.google.com/file/d/1HX2_JpMOjOIj1Z9rJjoet9XNy_cCAs5U/view?usp=sharing) and put it under [pretrained](https://github.com/danial880/ByteTrack-Sahi/tree/main/byte_track_sahi/pretrained) folder<p>  
+- Download [bytetrack_x_mot20](https://drive.google.com/file/d/1HX2_JpMOjOIj1Z9rJjoet9XNy_cCAs5U/view?usp=sharing) and put it under [pretrained](https://github.com/danial880/ByteTrack-Sahi/tree/main/byte_track_sahi/pretrained) folder  
 
 </details>  
 
