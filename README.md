@@ -67,7 +67,7 @@ Note: Docker-compose version >=1.28
 <big><b>Inference with docker</b></big>
 </summary>  
 
-- Set Path
+<h4>Set path first<h4>
 Open byte_track_sahi/tools/config.py
 ```
 # at line number 5
