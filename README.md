@@ -42,8 +42,9 @@ sudo systemctl restart docker
 <details>
 
 <summary>
-<big><b>Docker</b></big>
+<big><b>Docker Commands</b></big>
 </summary>  
+
 Note: Docker-compose version >=1.28  
 
 - Install
@@ -60,26 +61,29 @@ Note: Docker-compose version >=1.28
 ```
 </details> 
 
-## Inference
-#### Set Path
+<details>
+
+<summary>
+<big><b>Inference with docker</b></big>
+- Set Path
 Open byte_track_sahi/tools/config.py
 ```
 # at line number 5
 path = 'path/to/image/directory'
 ```
-### ByteTrack
+- ByteTrack
 Open byte_track_sahi/tools/config.py
 ```
 # at line number 3
 model_to_run = 'norm_yoloX'
 ```
-### ByteTrack with SAHI (Yolov7)
+- ByteTrack with SAHI (Yolov7)
 Open byte_track_sahi/tools/config.py
 ```
 # at line number 3
 model_to_run = 'sahi_yolo7'
 ```
-### ByteTrack with SAHI (YolovX)
+- ByteTrack with SAHI (YolovX)
 Open byte_track_sahi/tools/config.py
 ```
 # at line number 3
