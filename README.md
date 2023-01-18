@@ -64,7 +64,7 @@ Note: Docker-compose version >=1.28
 <details>
 
 <summary>
-<big><b>Inference with docker</b></big>
+<big><b>Inference with Docker</b></big>
 </summary>  
 
 <h4>Set path first</h4>  
