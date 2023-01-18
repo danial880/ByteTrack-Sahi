@@ -26,7 +26,9 @@ sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
 ```
 </details>  
-__**Note:__ Docker-compose version >=1.28  
+
+__Note:__ Docker-compose version >=1.28  
+
 
 <details>
 
