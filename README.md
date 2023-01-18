@@ -27,7 +27,7 @@ sudo systemctl restart docker
 ```
 </details> 
 **Note:** Docker-compose version >=1.28 
-<br/>
+<\n>
 <details>
 
 <summary>
