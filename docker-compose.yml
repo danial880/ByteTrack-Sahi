@@ -8,5 +8,11 @@ services:
       dockerfile: Dockerfile
     volumes: 
       - "./byte_track_sahi:/byte_track_sahi"
-     
-    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
+              
